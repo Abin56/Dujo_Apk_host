@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_application/home/admin/admin_meeting/admin_meeting_list.dart';
 import 'package:dujo_application/home/leave_application/apply_leave_application.dart';
 import 'package:dujo_application/home/parent_home/progress_report/progress_report.dart';
+import 'package:dujo_application/home/sample/under_maintance.dart';
 import 'package:dujo_application/home/student_home/events/school_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -10,8 +12,10 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../widget/button_container.dart';
 import '../../teacher_section/attendence_section/attendence-Book/attendence_Book_status.dart';
 import '../admin/admin_notice/admin_notice_model_list.dart';
+import '../student_home/Students_sections/homescreen/students_accessories.dart';
+import '../student_home/time_table/time_table_screen.dart';
 
-class ParentsAccessories extends StatelessWidget {
+class ParentsAccessories extends StatefulWidget {
   var schoolId;
   var classID;
   var studentID;
@@ -27,31 +31,92 @@ class ParentsAccessories extends StatelessWidget {
   });
 
   @override
+  State<ParentsAccessories> createState() => _ParentsAccessoriesState();
+}
+
+class _ParentsAccessoriesState extends State<ParentsAccessories> {
+  void retrieveTimeTableData() async {
+    mon = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Monday')
+        .get();
+    tue = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Tuesday')
+        .get();
+    wed = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Wednesday')
+        .get();
+    thu = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Thursday')
+        .get();
+    fri = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Friday')
+        .get();
+  }
+
+  @override
+  void initState() {
+    retrieveTimeTableData();
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     final navScreens = [
-      AttendenceBookScreen(schoolId: schoolId, classID: classID),
+      AttendenceBookScreen(schoolId: widget.schoolId, classID: widget.classID),
+      UnderMaintanceScreen(),
+      TimeTablePage(
+        schoolID: widget.schoolId,
+        classID: widget.classID,
+        mon: mon,
+        tues: tue,
+        wed: wed,
+        thurs: thu,
+        fri: fri,
+      ),
+      UnderMaintanceScreen(),
+      AdminNoticeModelList(
+          schoolId: widget.schoolId, fromPage: 'visibleGuardian'),
+      UnderMaintanceScreen(),
       ProgressReportListViewScreen(
-          schoolId: schoolId, classID: classID, studentId: studentID),
-      ProgressReportListViewScreen(
-          schoolId: schoolId, classID: classID, studentId: studentID),
-      ProgressReportListViewScreen(
-          schoolId: schoolId, classID: classID, studentId: studentID),
-          AdminNoticeModelList(schoolId: schoolId, fromPage: 'visibleGuardian'),
-      ProgressReportListViewScreen(
-          schoolId: schoolId, classID: classID, studentId: studentID),
-      ProgressReportListViewScreen(
-          schoolId: schoolId, classID: classID, studentId: studentID),
-      ProgressReportListViewScreen(
-          schoolId: schoolId, classID: classID, studentId: studentID),
-          ProgressReportListViewScreen(
-          schoolId: schoolId, classID: classID, studentId: studentID),
+          schoolId: widget.schoolId,
+          classID: widget.classID,
+          studentId: widget.studentID),
       LeaveApplicationScreen(
-          studentName: studentName,
-          parentName: parentName,
-          classID: classID,
-          schoolId: schoolId,
-          studentID: studentID),
-          AdminMeetingModelList(schoolId: schoolId,fromPage:'visibleGuardian' ,)
+          studentName: widget.studentName,
+          parentName: widget.parentName,
+          classID: widget.classID,
+          schoolId: widget.schoolId,
+          studentID: widget.studentID),
+      UnderMaintanceScreen(),
+      UnderMaintanceScreen(),
+      AdminMeetingModelList(
+        schoolId: widget.schoolId,
+        fromPage: 'visibleGuardian',
+      )
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;

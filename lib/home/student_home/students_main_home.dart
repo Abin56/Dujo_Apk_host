@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+import '../sample/under_maintance.dart';
 import 'Students_sections/Drawer/student_drawer.dart';
 import 'Students_sections/homescreen/widgets/home_screen.dart';
 
@@ -29,7 +30,6 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
     });
   }
 
-
   // int currentIndex = 0;
   // currentindex(int index) {
   //   currentIndex = index;
@@ -41,32 +41,19 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-      List<Widget> pages = [
-    StudentsHomeHomeScreen(
-      classID: widget.classID,
-      schoolID: widget.schoolID,
-      studentEmailid: widget.studentEmailid,
-    ),
-   StudentsHomeHomeScreen(
-      classID: widget.classID,
-      schoolID: widget.schoolID,
-      studentEmailid: widget.studentEmailid,
-    ),
-   StudentsHomeHomeScreen(
-      classID: widget.classID,
-      schoolID: widget.schoolID,
-      studentEmailid: widget.studentEmailid,
-    ),
-   StudentsHomeHomeScreen(
-      classID: widget.classID,
-      schoolID: widget.schoolID,
-      studentEmailid: widget.studentEmailid,
-    ),
-  ];
-    // setSeenonBoard();
+    List<Widget> pages = [
+      StudentsHomeHomeScreen(
+        classID: widget.classID,
+        schoolID: widget.schoolID,
+        studentEmailid: widget.studentEmailid,
+      ),
+      const UnderMaintanceScreen(),
+      const UnderMaintanceScreen(),
+      const UnderMaintanceScreen(),
+    ];
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 6, 71, 157),
+        backgroundColor: const Color.fromARGB(255, 6, 71, 157),
         title: const Text("Dujo"),
       ),
       body: pages[_page],
@@ -74,7 +61,7 @@ class _StudentsMainHomeScreenState extends State<StudentsMainHomeScreen> {
         height: 71,
         decoration: BoxDecoration(
           // color: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           border: Border.all(color: Colors.white.withOpacity(0.13)),
           gradient: const LinearGradient(

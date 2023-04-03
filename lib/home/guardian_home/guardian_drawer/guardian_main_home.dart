@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../../sample/under_maintance.dart';
+
 class GuardianMainHomeScreen extends StatefulWidget {
   var classID;
   var schoolID;
@@ -46,21 +48,9 @@ class _GuardianMainHomeScreenState extends State<GuardianMainHomeScreen> {
         guardianmailId: widget.parentmailId,
         schoolId: widget.schoolID,
       ),
-      GuardianHomeScreen(
-        classId: widget.classID,
-        guardianmailId: widget.parentmailId,
-        schoolId: widget.schoolID,
-      ),
-      GuardianHomeScreen(
-        classId: widget.classID,
-        guardianmailId: widget.parentmailId,
-        schoolId: widget.schoolID,
-      ),
-      GuardianHomeScreen(
-        classId: widget.classID,
-        guardianmailId: widget.parentmailId,
-        schoolId: widget.schoolID,
-      ),
+      UnderMaintanceScreen(),
+      UnderMaintanceScreen(),
+      UnderMaintanceScreen(),
     ];
     // setSeenonBoard();
     return Scaffold(

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dujo_application/home/admin/admin_meeting/admin_meeting_list.dart';
 import 'package:dujo_application/home/teacher_home/class_wise_subjects.dart';
 import 'package:dujo_application/home/teacher_home/leave_letters/leave_lettersList.dart';
@@ -14,8 +15,11 @@ import '../../../../widget/button_container.dart';
 import '../../teacher_section/attendence_section/attendence-Book/attendence_Book_status.dart';
 import '../../teacher_section/attendence_section/classTeacher_classes.dart';
 import '../admin/admin_notice/admin_notice_model_list.dart';
+import '../sample/under_maintance.dart';
+import '../student_home/Students_sections/homescreen/students_accessories.dart';
+import '../student_home/time_table/time_table_screen.dart';
 
-class TeacherAccessories extends StatelessWidget {
+class TeacherAccessories extends StatefulWidget {
   var schoolId;
   var teacherEmail;
   var classID;
@@ -29,20 +33,89 @@ class TeacherAccessories extends StatelessWidget {
   });
 
   @override
+  State<TeacherAccessories> createState() => _TeacherAccessoriesState();
+}
+
+class _TeacherAccessoriesState extends State<TeacherAccessories> {
+  void retrieveTimeTableData() async {
+    mon = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Monday')
+        .get();
+    tue = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Tuesday')
+        .get();
+    wed = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Wednesday')
+        .get();
+    thu = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Thursday')
+        .get();
+    fri = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Friday')
+        .get();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    retrieveTimeTableData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenNavigation = [
       ClassTeacherIdentifyScreen(
-          classID: classID, schoolID: schoolId, teacheremailID: teacherEmail),
-      AttendenceBookScreen(schoolId: schoolId, classID: classID),
-      AttendenceBookScreen(schoolId: schoolId, classID: classID),
-      AttendenceBookScreen(schoolId: schoolId, classID: classID),
-      AttendenceBookScreen(schoolId: schoolId, classID: classID),
-      AdminNoticeModelList(schoolId: schoolId, fromPage: 'visibleTeacher'),
-      AttendenceBookScreen(schoolId: schoolId, classID: classID),
+          classID: widget.classID,
+          schoolID: widget.schoolId,
+          teacheremailID: widget.teacherEmail),
+      AttendenceBookScreen(schoolId: widget.schoolId, classID: widget.classID),
+      UnderMaintanceScreen(),
+      TimeTablePage(
+        schoolID: widget.schoolId,
+        classID: widget.classID,
+        mon: mon,
+        tues: tue,
+        wed: wed,
+        thurs: thu,
+        fri: fri,
+      ),
+      UnderMaintanceScreen(),
+      AdminNoticeModelList(
+          schoolId: widget.schoolId, fromPage: 'visibleTeacher'),
+       UnderMaintanceScreen(),
       CreateExamNameScreen(
-          schooilID: schoolId, classID: classID, teacherId: teacherEmail),
-      LeaveLettersListviewScreen(schooilID: schoolId, classID: classID),
-      AdminMeetingModelList(schoolId: schoolId,fromPage: 'visibleTeacher'),
+          schooilID: widget.schoolId,
+          classID: widget.classID,
+          teacherId: widget.teacherEmail),
+      LeaveLettersListviewScreen(
+          schooilID: widget.schoolId, classID: widget.classID),
+      AdminMeetingModelList(
+          schoolId: widget.schoolId, fromPage: 'visibleTeacher'),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;

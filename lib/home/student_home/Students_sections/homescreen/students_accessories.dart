@@ -8,39 +8,77 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../teacher_section/attendence_section/attendence-Book/attendence_Book_status.dart';
 import '../../../../widget/button_container.dart';
+import '../../../parent_home/progress_report/progress_report.dart';
+import '../../../sample/under_maintance.dart';
 import '../../../time_table/time_table_view_screen.dart';
 
 class StudentsAccessories extends StatefulWidget {
+  var studentID;
   var schoolId;
   var classID;
   StudentsAccessories({
     required this.classID,
     required this.schoolId,
+    required this.studentID,
     super.key,
-  }); 
+  });
 
   @override
   State<StudentsAccessories> createState() => _StudentsAccessoriesState();
-} 
+}
 
-
-late DocumentSnapshot<Map<String, dynamic>> mon; 
-late DocumentSnapshot<Map<String, dynamic>> tue; 
+late DocumentSnapshot<Map<String, dynamic>> mon;
+late DocumentSnapshot<Map<String, dynamic>> tue;
 late DocumentSnapshot<Map<String, dynamic>> wed;
 late DocumentSnapshot<Map<String, dynamic>> thu;
 late DocumentSnapshot<Map<String, dynamic>> fri;
 
 class _StudentsAccessoriesState extends State<StudentsAccessories> {
-  void retrieveTimeTableData()async{
-    mon = await FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolId).collection('Classes').doc(widget.classID).collection('TimeTables').doc('Monday').get(); 
-     tue = await FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolId).collection('Classes').doc(widget.classID).collection('TimeTables').doc('Tuesday').get(); 
-      wed = await FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolId).collection('Classes').doc(widget.classID).collection('TimeTables').doc('Wednesday').get(); 
-       thu = await FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolId).collection('Classes').doc(widget.classID).collection('TimeTables').doc('Thursday').get(); 
-        fri = await FirebaseFirestore.instance.collection('SchoolListCollection').doc(widget.schoolId).collection('Classes').doc(widget.classID).collection('TimeTables').doc('Friday').get(); 
-  } 
+  void retrieveTimeTableData() async {
+    mon = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Monday')
+        .get();
+    tue = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Tuesday')
+        .get();
+    wed = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Wednesday')
+        .get();
+    thu = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Thursday')
+        .get();
+    fri = await FirebaseFirestore.instance
+        .collection('SchoolListCollection')
+        .doc(widget.schoolId)
+        .collection('Classes')
+        .doc(widget.classID)
+        .collection('TimeTables')
+        .doc('Friday')
+        .get();
+  }
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     retrieveTimeTableData();
   }
@@ -48,17 +86,29 @@ class _StudentsAccessoriesState extends State<StudentsAccessories> {
   @override
   Widget build(BuildContext context) {
     final screenNavigation = [
-      AttendenceBookScreen(schoolId: widget.schoolId, classID: widget.classID),                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
       AttendenceBookScreen(schoolId: widget.schoolId, classID: widget.classID),
-      TimeTablePage(schoolID: widget.schoolId, classID: widget.classID, mon: mon, tues: tue, wed: wed, thurs: thu, fri: fri,),
-      AttendenceBookScreen(schoolId: widget.schoolId, classID: widget.classID), 
-      
-      AdminNoticeModelList(schoolId: widget.schoolId, fromPage: 'visibleStudent'),
-      AttendenceBookScreen(schoolId: widget.schoolId, classID: widget.classID),
-      AttendenceBookScreen(schoolId: widget.schoolId, classID: widget.classID),
-      AttendenceBookScreen(schoolId: widget.schoolId, classID: widget.classID),
-      AttendenceBookScreen(schoolId: widget.schoolId, classID: widget.classID),
-      AdminMeetingModelList(schoolId: widget.schoolId,fromPage: 'visibleStudent'),
+      UnderMaintanceScreen(),
+      TimeTablePage(
+        schoolID: widget.schoolId,
+        classID: widget.classID,
+        mon: mon,
+        tues: tue,
+        wed: wed,
+        thurs: thu,
+        fri: fri,
+      ),
+      UnderMaintanceScreen(),
+      AdminNoticeModelList(
+          schoolId: widget.schoolId, fromPage: 'visibleStudent'),
+      UnderMaintanceScreen(),
+      ProgressReportListViewScreen(
+          schoolId: widget.schoolId,
+          classID: widget.classID,
+          studentId: widget.studentID),
+      UnderMaintanceScreen(),
+      UnderMaintanceScreen(),
+      AdminMeetingModelList(
+          schoolId: widget.schoolId, fromPage: 'visibleStudent'),
     ];
     int columnCount = 2;
     double _w = MediaQuery.of(context).size.width;

@@ -25,8 +25,7 @@ class StudentsHomeHomeScreen extends StatefulWidget {
   State<StudentsHomeHomeScreen> createState() => _StudentsHomeHomeScreenState();
 }
 
-class _StudentsHomeHomeScreenState extends State<StudentsHomeHomeScreen>
-    with TickerProviderStateMixin {
+class _StudentsHomeHomeScreenState extends State<StudentsHomeHomeScreen> {
   String studentName = '';
   String studentclass = '';
   String rollNumber = '';
@@ -125,7 +124,6 @@ class _StudentsHomeHomeScreenState extends State<StudentsHomeHomeScreen>
 
   Widget build(BuildContext context) {
     log('message');
-    TabController tabController = TabController(length: 3, vsync: this);
     var screenSize = MediaQuery.of(context).size;
     // log(studentName);
     return Scaffold(
@@ -204,9 +202,12 @@ class _StudentsHomeHomeScreenState extends State<StudentsHomeHomeScreen>
           ),
 
           //other will use all the remaining height of screen
-          StudentsAccessories(
-            classID: widget.classID,
-            schoolId: widget.schoolID,
+          Expanded(
+            child: StudentsAccessories(
+              studentID: widget.studentEmailid,
+              classID: widget.classID,
+              schoolId: widget.schoolID,
+            ),
           ),
         ],
       ),
