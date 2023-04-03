@@ -122,7 +122,7 @@ class ApplyLeaveLetterStatusToFireBase {
           .doc(classId)
           .collection("LeaveApplication")
           .doc(leavedocID)
-          .set({'id':leavedocID}).then((value) {
+          .set({'id': leavedocID}).then((value) {
         firebase
             .collection("SchoolListCollection")
             .doc(schoolid)

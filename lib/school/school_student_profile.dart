@@ -291,7 +291,7 @@ getStudentDetails();
                                   size: 18, color: Colors.grey),
                             ),
                             isExpanded: true,
-                            items: ["MALE", "FEMALE", ""].map(
+                            items: ["male", "female"].map(
                               (val) {
                                 return DropdownMenuItem<String>(
                                   value: val,

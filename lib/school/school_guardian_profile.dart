@@ -337,8 +337,8 @@ class _SchoolGuardianState extends State<SchoolGuardian> {
                             ),
                             isExpanded: true,
                             items: [
-                              "MALE",
-                              "FEMALE",
+                              "male",
+                              "female",
                             ].map(
                               (val) {
                                 return DropdownMenuItem<String>(
