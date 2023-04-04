@@ -49,7 +49,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.DujoSchools.leptonCommunications"
+        applicationId "in.DujoSchools.leptonCommunications"
         minSdkVersion 23
         multiDexEnabled true
         targetSdkVersion flutter.targetSdkVersion

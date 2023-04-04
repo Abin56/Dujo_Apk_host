@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1019389632971:android:dc24f226c1e3315c06164e",
+        "mobilesdk_app_id": "1:1019389632971:android:c92299d71d542fab06164e",
         "android_client_info": {
-          "package_name": "com.DujoSchools.leptonCommunications"
+          "package_name": "in.DujoSchools.leptonCommunications"
         }
       },
       "oauth_client": [
@@ -29,6 +29,13 @@
             {
               "client_id": "1019389632971-lo4nepfkv0psstpd49vl3tu646vk2f58.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1019389632971-q3fbnncg1vav95pbgp6efj3g9i08kj4u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dujoApplication"
+              }
             }
           ]
         }

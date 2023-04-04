@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDfP_OzJhm2Dr7XIe_xvXzP_QsbdsDemK4',
-    appId: '1:1019389632971:android:dc24f226c1e3315c06164e',
+    appId: '1:1019389632971:android:c92299d71d542fab06164e',
     messagingSenderId: '1019389632971',
     projectId: 'dujo-kerala-schools-1a6c5',
     storageBucket: 'dujo-kerala-schools-1a6c5.appspot.com',
@@ -63,20 +63,22 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAsAZB-W_pgt1Sf07Nmb8Oi3mgAjrra0L4',
-    appId: '1:1019389632971:ios:d6f1814886060c4306164e',
+    appId: '1:1019389632971:ios:b41aa06411cb81ae06164e',
     messagingSenderId: '1019389632971',
     projectId: 'dujo-kerala-schools-1a6c5',
     storageBucket: 'dujo-kerala-schools-1a6c5.appspot.com',
+    androidClientId: '1019389632971-1h818bij5go8q5t9ob99jvb2lbhv1nu1.apps.googleusercontent.com',
     iosClientId: '1019389632971-q3fbnncg1vav95pbgp6efj3g9i08kj4u.apps.googleusercontent.com',
     iosBundleId: 'com.example.dujoApplication',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyAsAZB-W_pgt1Sf07Nmb8Oi3mgAjrra0L4',
-    appId: '1:1019389632971:ios:d6f1814886060c4306164e',
+    appId: '1:1019389632971:ios:b41aa06411cb81ae06164e',
     messagingSenderId: '1019389632971',
     projectId: 'dujo-kerala-schools-1a6c5',
     storageBucket: 'dujo-kerala-schools-1a6c5.appspot.com',
+    androidClientId: '1019389632971-1h818bij5go8q5t9ob99jvb2lbhv1nu1.apps.googleusercontent.com',
     iosClientId: '1019389632971-q3fbnncg1vav95pbgp6efj3g9i08kj4u.apps.googleusercontent.com',
     iosBundleId: 'com.example.dujoApplication',
   );

@@ -69,7 +69,7 @@ class Onboardingpage extends StatelessWidget {
                       ),
                       height: 60,
                       width: 200,
-                      child: const Center(child: Text("Lauch app",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 16),)),
+                      child: const Center(child: Text("Launch app",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 16),)),
                     ),
                   ),
                 ],
